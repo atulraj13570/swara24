@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { BookOpen, Trophy, Film, Newspaper, Lightbulb, Heart, ShoppingBag, Play, ArrowLeft, FileText, Video, Volume2, Coins, ShoppingCart, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Scene3D from "@/components/Scene3D";
 
 interface Subject {
   id: number;
@@ -345,14 +346,17 @@ export default function Home() {
       {currentView === "grid" ? (
         // Grid View
         <>
-          <section className="relative min-h-[80vh] flex items-center bg-background overflow-hidden">
-            {/* Static Glass Background Effect */}
+          <section className="relative min-h-[90vh] flex items-center bg-background overflow-hidden pt-24">
+            {/* 3D and Glass Background Effect */}
             <div className="absolute inset-0 z-0 overflow-hidden">
+              <div className="absolute inset-0 opacity-40">
+                <Scene3D />
+              </div>
               <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-gradient-to-br from-primary/10 to-secondary/5 blur-[120px]" />
               <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-gradient-to-tr from-accent/10 to-transparent blur-[100px]" />
               
-              {/* Still Glass Orb */}
-              <div className="absolute top-[20%] right-[10%] w-96 h-96 rounded-full glass border border-white/40 opacity-30 pointer-events-none" />
+              {/* Still Glass Orb (Subtle) */}
+              <div className="absolute top-[10%] right-[5%] w-[500px] h-[500px] rounded-full glass border border-white/20 opacity-20 pointer-events-none" />
             </div>
 
             <div className="section-container relative z-10 grid md:grid-cols-2 gap-12 items-center">
