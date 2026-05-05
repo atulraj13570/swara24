@@ -23,9 +23,9 @@ export default function Login() {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-6">
             <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center">
-              <span className="text-primary font-bold text-xl">L</span>
+              <span className="text-primary font-bold text-xl">S</span>
             </div>
-            <span className="text-2xl font-bold text-white">Learnex</span>
+            <span className="text-2xl font-bold text-white">Swara24</span>
           </Link>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
             Welcome Back

@@ -13,9 +13,9 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-                <span className="text-primary font-bold text-lg">L</span>
+                <span className="text-primary font-bold text-lg">S</span>
               </div>
-              <span className="text-2xl font-bold">Learnex</span>
+              <span className="text-2xl font-bold">Swara24</span>
             </div>
             <p className="text-white/70 text-sm leading-relaxed">
               Empowering learners worldwide with premium education and expert instruction.
@@ -111,10 +111,10 @@ export default function Footer() {
                 <div>
                   <p className="text-sm text-white/70">Email</p>
                   <a
-                    href="mailto:hello@learnex.com"
-                    className="text-white hover:text-accent transition-colors"
+                    href="mailto:hello@swara24.com"
+                    className="text-gray-400 hover:text-primary transition-colors"
                   >
-                    hello@learnex.com
+                    hello@swara24.com
                   </a>
                 </div>
               </div>
@@ -144,7 +144,7 @@ export default function Footer() {
         {/* Bottom Footer */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/70 text-sm">
-            © {currentYear} Learnex. All rights reserved.
+            © {currentYear} Swara24. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
             <a href="#" className="text-white/70 hover:text-accent transition-colors">

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { BookOpen, Trophy, Film, Newspaper, Lightbulb, Heart, ShoppingBag, Play, ArrowLeft, FileText, Video, Volume2, Coins, ShoppingCart } from "lucide-react";
+import { BookOpen, Trophy, Film, Newspaper, Lightbulb, Heart, ShoppingBag, Play, ArrowLeft, FileText, Video, Volume2, Coins, ShoppingCart, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Subject {
   id: number;
@@ -344,44 +345,152 @@ export default function Home() {
       {currentView === "grid" ? (
         // Grid View
         <>
-          <section className="gradient-primary text-white py-16 md:py-24 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-48"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -ml-48"></div>
+            {/* Static Glass Background Effect */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+              <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-gradient-to-br from-primary/10 to-secondary/5 blur-[120px]" />
+              <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-gradient-to-tr from-accent/10 to-transparent blur-[100px]" />
+              
+              {/* Still Glass Orb */}
+              <div className="absolute top-[20%] right-[10%] w-96 h-96 rounded-full glass border border-white/40 opacity-30 pointer-events-none" />
+            </div>
 
-            <div className="section-container relative z-10 text-center space-y-4">
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Your Complete Learning Ecosystem
-              </h1>
-              <p className="text-lg text-white/80 max-w-3xl mx-auto">
-                Explore all categories and find what you're looking for
-              </p>
+            <div className="section-container relative z-10 grid md:grid-cols-2 gap-12 items-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="space-y-8"
+              >
+                <div className="space-y-4">
+                  <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight text-foreground">
+                    Master Your Future with <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">Swara24</span>
+                  </h1>
+                  <p className="text-xl text-muted-foreground max-w-xl leading-relaxed">
+                    The ultimate ecosystem for students. Classes 6-12, gamified quizzes, movie summaries, and premium educational products.
+                  </p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="btn-primary px-8 py-4 text-lg rounded-2xl shadow-lg shadow-primary/25"
+                  >
+                    Start Learning Now
+                  </motion.button>
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-4 text-lg rounded-2xl border-2 border-primary/20 hover:bg-primary/5 transition-colors text-primary font-semibold"
+                  >
+                    Watch Demo
+                  </motion.button>
+                </div>
+
+                <div className="flex items-center gap-6 pt-4">
+                  <div className="flex -space-x-4">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="w-12 h-12 rounded-full border-4 border-background bg-accent" />
+                    ))}
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold">Joined by 10k+ students</div>
+                    <div className="flex text-yellow-500">{"★".repeat(5)}</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, delay: 0.2 }}
+                className="hidden md:block relative"
+              >
+                {/* Visual accent */}
+                <div className="absolute inset-0 bg-primary/20 blur-[120px] rounded-full" />
+              </motion.div>
             </div>
           </section>
 
-          <section className="py-16 md:py-24 bg-white">
+          <section className="py-24 bg-white relative z-10">
             <div className="section-container">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {sections.map((section) => (
-                  <button
+              <div className="text-center mb-16 space-y-4">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-4xl md:text-5xl font-bold text-primary"
+                >
+                  Explore Your Learning Path
+                </motion.h2>
+                <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                  Choose from our wide range of categories designed to make learning fun and effective.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {sections.map((section, idx) => (
+                  <motion.button
                     key={section.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                    whileHover={{ 
+                      y: -10, 
+                      rotateX: 10,
+                      rotateY: -5,
+                      scale: 1.02,
+                      transition: { duration: 0.2 } 
+                    }}
                     onClick={() => handleSelectSection(section.id)}
-                    className="group rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-white border border-gray-100 text-left"
+                    className="group relative perspective-1000 rounded-3xl overflow-hidden glass glass-hover text-left"
+                    style={{ transformStyle: "preserve-3d" }}
                   >
-                    <div className={`w-full h-32 bg-gradient-to-br ${section.color}`}></div>
-                    <div className="p-6 space-y-3">
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg bg-gradient-to-br ${section.color} text-white`}>
+                    <div className={`w-full h-40 bg-gradient-to-br ${section.color} relative overflow-hidden`}>
+                      <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
+                      <motion.div 
+                        initial={{ scale: 1 }}
+                        whileHover={{ scale: 1.3, rotate: 15, z: 50 }}
+                        className="absolute inset-0 flex items-center justify-center text-white/10"
+                      >
+                        {/* Enlarged icon background */}
+                        <div className="scale-[5] opacity-10">
                           {section.icon}
                         </div>
-                        <h3 className="text-lg font-bold text-primary group-hover:text-secondary transition-colors">
+                      </motion.div>
+                    </div>
+                    
+                    <div className="p-8 space-y-4 relative">
+                      <div className="flex items-center gap-4">
+                        <motion.div 
+                          whileHover={{ 
+                            rotateY: 180,
+                            scale: 1.1,
+                            z: 20
+                          }}
+                          transition={{ duration: 0.6, type: "spring" }}
+                          className={`p-3 rounded-2xl bg-gradient-to-br ${section.color} text-white shadow-xl`}
+                        >
+                          {section.icon}
+                        </motion.div>
+                        <h3 className="text-xl font-bold text-primary group-hover:text-accent transition-colors">
                           {section.title}
                         </h3>
                       </div>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-gray-600/80 group-hover:text-gray-900 transition-colors leading-relaxed">
                         {section.description}
                       </p>
+                      
+                      <div className="pt-4 flex items-center text-primary font-bold gap-2 group-hover:translate-x-2 transition-transform">
+                        <span>Explore</span>
+                        <motion.span
+                          animate={{ x: [0, 8, 0] }}
+                          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                        >→</motion.span>
+                      </div>
                     </div>
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>

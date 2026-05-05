@@ -7,7 +7,7 @@
 
 @layer base {
   /**
-   * Tailwind CSS theme - Learnex Education Platform
+   * Tailwind CSS theme - Swara24 Education Platform
    * tailwind.config.ts expects the following color variables to be expressed as HSL values.
    * A different format will require also updating the theme in tailwind.config.ts.
   */
@@ -140,5 +140,17 @@
 
   .btn-outline {
     @apply inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-primary text-primary rounded-lg transition-all duration-300 hover:bg-primary hover:text-white;
+  }
+
+  .glass {
+    @apply bg-white/40 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
+  }
+
+  .glass-hover {
+    @apply transition-all duration-500 hover:bg-white/60 hover:backdrop-blur-2xl hover:border-white/40 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.15)];
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
   }
 }
