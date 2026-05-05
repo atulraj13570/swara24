@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { BookOpen, Trophy, Film, Newspaper, Lightbulb, Heart, ShoppingBag, Play, ArrowLeft } from "lucide-react";
+import { BookOpen, Trophy, Film, Newspaper, Lightbulb, Heart, ShoppingBag, Play, ArrowLeft, FileText, Video } from "lucide-react";
 
 interface SectionItem {
   id: number;
@@ -141,18 +141,44 @@ const sections: Section[] = [
   },
 ];
 
+type ViewState = "grid" | "format" | "content";
+
 export default function Home() {
+  const [currentView, setCurrentView] = useState<ViewState>("grid");
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
+  const [selectedFormat, setSelectedFormat] = useState<"text" | "video" | null>(null);
 
   const currentSection = selectedSection
     ? sections.find((s) => s.id === selectedSection)
     : null;
 
+  const handleSelectSection = (sectionId: string) => {
+    setSelectedSection(sectionId);
+    setCurrentView("format");
+    setSelectedFormat(null);
+  };
+
+  const handleSelectFormat = (format: "text" | "video") => {
+    setSelectedFormat(format);
+    setCurrentView("content");
+  };
+
+  const handleBackToGrid = () => {
+    setCurrentView("grid");
+    setSelectedSection(null);
+    setSelectedFormat(null);
+  };
+
+  const handleBackToFormat = () => {
+    setCurrentView("format");
+    setSelectedFormat(null);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {!selectedSection ? (
+      {currentView === "grid" ? (
         // Grid View - All Sections
         <>
           {/* Hero Banner */}
@@ -177,8 +203,8 @@ export default function Home() {
                 {sections.map((section) => (
                   <button
                     key={section.id}
-                    onClick={() => setSelectedSection(section.id)}
-                    className="group rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-white border border-gray-100"
+                    onClick={() => handleSelectSection(section.id)}
+                    className="group rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-white border border-gray-100 text-left"
                   >
                     {/* Color Background */}
                     <div
@@ -191,11 +217,11 @@ export default function Home() {
                         <div className={`p-2 rounded-lg bg-gradient-to-br ${section.color} text-white`}>
                           {section.icon}
                         </div>
-                        <h3 className="text-lg font-bold text-primary text-left group-hover:text-secondary transition-colors">
+                        <h3 className="text-lg font-bold text-primary group-hover:text-secondary transition-colors">
                           {section.title}
                         </h3>
                       </div>
-                      <p className="text-gray-600 text-sm text-left">
+                      <p className="text-gray-600 text-sm">
                         {section.description}
                       </p>
                     </div>
@@ -212,24 +238,23 @@ export default function Home() {
                 Start Exploring Now
               </h2>
               <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                Click on any category above to explore all available classes and content
+                Click on any category above to choose between Text or Video content
               </p>
             </div>
           </section>
 
           <Footer />
         </>
-      ) : (
-        // Detail View - Selected Section Items
+      ) : currentView === "format" ? (
+        // Format Selection View
         <>
-          {/* Header with Back Button */}
           <section className={`bg-gradient-to-br ${currentSection!.color} text-white py-12 relative overflow-hidden`}>
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-48"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -ml-48"></div>
 
             <div className="section-container relative z-10">
               <button
-                onClick={() => setSelectedSection(null)}
+                onClick={handleBackToGrid}
                 className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold"
               >
                 <ArrowLeft className="w-5 h-5" />
@@ -245,7 +270,100 @@ export default function Home() {
                     {currentSection!.title}
                   </h1>
                   <p className="text-white/80 text-lg mt-2">
-                    {currentSection!.description}
+                    Choose between text or video content
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Format Selection */}
+          <section className="py-20 md:py-32 bg-white">
+            <div className="section-container">
+              <div className="max-w-4xl mx-auto space-y-8">
+                <h2 className="text-3xl md:text-4xl font-bold text-center text-primary mb-12">
+                  Choose Your Learning Format
+                </h2>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                  {/* Text Option */}
+                  <button
+                    onClick={() => handleSelectFormat("text")}
+                    className="group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white border-2 border-gray-200 hover:border-primary"
+                  >
+                    <div className="bg-gradient-to-br from-blue-500 to-blue-600 h-48 flex items-center justify-center">
+                      <FileText className="w-20 h-20 text-white" />
+                    </div>
+                    <div className="p-8 space-y-4">
+                      <h3 className="text-2xl font-bold text-primary">Text Content</h3>
+                      <p className="text-gray-600 text-lg">
+                        Read comprehensive notes, articles, and study materials at your own pace
+                      </p>
+                      <div className="pt-4">
+                        <span className="inline-block px-6 py-2 bg-blue-100 text-primary rounded-lg font-semibold">
+                          Choose Text
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+
+                  {/* Video Option */}
+                  <button
+                    onClick={() => handleSelectFormat("video")}
+                    className="group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white border-2 border-gray-200 hover:border-primary"
+                  >
+                    <div className="bg-gradient-to-br from-orange-500 to-orange-600 h-48 flex items-center justify-center">
+                      <Video className="w-20 h-20 text-white" />
+                    </div>
+                    <div className="p-8 space-y-4">
+                      <h3 className="text-2xl font-bold text-primary">Video Content</h3>
+                      <p className="text-gray-600 text-lg">
+                        Watch engaging video lectures and tutorials from expert instructors
+                      </p>
+                      <div className="pt-4">
+                        <span className="inline-block px-6 py-2 bg-orange-100 text-primary rounded-lg font-semibold">
+                          Choose Video
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <Footer />
+        </>
+      ) : (
+        // Content View - Selected Format
+        <>
+          <section className={`bg-gradient-to-br ${currentSection!.color} text-white py-12 relative overflow-hidden`}>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-48"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -ml-48"></div>
+
+            <div className="section-container relative z-10">
+              <button
+                onClick={handleBackToFormat}
+                className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                Back to Format Selection
+              </button>
+
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-white/20 backdrop-blur-md">
+                  {selectedFormat === "text" ? (
+                    <FileText className="w-8 h-8" />
+                  ) : (
+                    <Video className="w-8 h-8" />
+                  )}
+                </div>
+                <div>
+                  <h1 className="text-4xl md:text-5xl font-bold">
+                    {currentSection!.title}
+                  </h1>
+                  <p className="text-white/80 text-lg mt-2">
+                    {selectedFormat === "text" ? "Text Content" : "Video Content"}
                   </p>
                 </div>
               </div>
@@ -269,8 +387,11 @@ export default function Home() {
                       <h3 className="text-xl font-bold text-primary group-hover:text-secondary transition-colors">
                         {item.name}
                       </h3>
+                      <p className="text-gray-600 text-sm mt-2">
+                        {selectedFormat === "text" ? "Read detailed content" : "Watch full course"}
+                      </p>
                       <button className="mt-4 inline-flex items-center gap-2 text-accent font-semibold group-hover:gap-3 transition-all">
-                        Explore <span>→</span>
+                        {selectedFormat === "text" ? "Start Reading" : "Watch Now"} <span>→</span>
                       </button>
                     </div>
                   </div>
@@ -279,18 +400,26 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Continue Exploring CTA */}
+          {/* Continue CTA */}
           <section className="py-16 md:py-24 bg-gray-50">
             <div className="section-container text-center space-y-6">
               <h2 className="text-3xl md:text-4xl font-bold text-primary">
-                Explore More Categories
+                Explore More
               </h2>
-              <button
-                onClick={() => setSelectedSection(null)}
-                className="btn-primary"
-              >
-                Back to All Categories
-              </button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={handleBackToFormat}
+                  className="btn-outline"
+                >
+                  Try Other Format
+                </button>
+                <button
+                  onClick={handleBackToGrid}
+                  className="btn-primary"
+                >
+                  Back to All Categories
+                </button>
+              </div>
             </div>
           </section>
 
