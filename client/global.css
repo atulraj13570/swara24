@@ -129,11 +129,11 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 font-semibold text-white bg-accent rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/30;
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold text-white bg-accent rounded-[1rem] transition-all duration-300 hover:shadow-lg hover:shadow-accent/30;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-primary text-primary rounded-lg transition-all duration-300 hover:bg-primary hover:text-white;
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold border-2 border-primary text-primary rounded-[1rem] transition-all duration-300 hover:bg-primary hover:text-white;
   }
 
   .section-container {
