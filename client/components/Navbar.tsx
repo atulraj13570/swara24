@@ -43,7 +43,9 @@ export default function Navbar() {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <button className="btn-outline">Login</button>
+            <Link to="/login" className="btn-outline">
+              Login
+            </Link>
             <button className="btn-primary">Sign Up</button>
           </div>
 
@@ -75,7 +77,9 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="border-t border-gray-200 pt-4 flex flex-col gap-3">
-                <button className="btn-outline w-full">Login</button>
+                <Link to="/login" className="btn-outline w-full text-center">
+                  Login
+                </Link>
                 <button className="btn-primary w-full">Sign Up</button>
               </div>
             </div>
