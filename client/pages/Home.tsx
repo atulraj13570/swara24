@@ -345,6 +345,7 @@ export default function Home() {
       {currentView === "grid" ? (
         // Grid View
         <>
+          <section className="relative min-h-[80vh] flex items-center bg-background overflow-hidden">
             {/* Static Glass Background Effect */}
             <div className="absolute inset-0 z-0 overflow-hidden">
               <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-gradient-to-br from-primary/10 to-secondary/5 blur-[120px]" />
