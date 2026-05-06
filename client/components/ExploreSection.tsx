@@ -15,7 +15,8 @@ interface ExploreCard {
   title: string;
   icon: React.ReactNode;
   color: string;
-}
+  image: string;
+},
 
 const exploreCards: ExploreCard[] = [
   {
@@ -23,6 +24,7 @@ const exploreCards: ExploreCard[] = [
     title: "About Us",
     icon: <Users className="w-8 h-8" />,
     color: "from-blue-400 to-blue-500",
+    image: "/images/about.jpeg",
   },
   {
   id: 2,
@@ -36,42 +38,49 @@ const exploreCards: ExploreCard[] = [
     title: "Teachers",
     icon: <BarChart3 className="w-8 h-8" />,
     color: "from-pink-400 to-pink-500",
+    image: "/images/teachers.jpeg",
   },
   {
     id: 4,
     title: "Contact",
     icon: <Mail className="w-8 h-8" />,
     color: "from-green-400 to-green-500",
+    image: "/images/default.jpg",
   },
   {
     id: 5,
     title: "Services",
     icon: <Zap className="w-8 h-8" />,
     color: "from-yellow-400 to-yellow-500",
+    image: "/images/default.jpg",
   },
   {
     id: 6,
     title: "Pricing",
     icon: <DollarSign className="w-8 h-8" />,
     color: "from-red-400 to-red-500",
+    image: "/images/beauty.jpeg",
   },
   {
     id: 7,
     title: "Courses",
     icon: <Video className="w-8 h-8" />,
     color: "from-cyan-400 to-cyan-500",
+    image: "/images/paid-classes.jpeg",
   },
   {
     id: 8,
     title: "Dashboard",
     icon: <Settings className="w-8 h-8" />,
     color: "from-indigo-400 to-indigo-500",
+    image: "/images/default.jpg",
   },
   {
     id: 9,
     title: "More",
     icon: <MoreHorizontal className="w-8 h-8" />,
     color: "from-gray-400 to-gray-500",
+    image: "/images/default.jpg",
   },
 ];
 
