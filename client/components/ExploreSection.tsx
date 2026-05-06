@@ -25,11 +25,12 @@ const exploreCards: ExploreCard[] = [
     color: "from-blue-400 to-blue-500",
   },
   {
-    id: 2,
-    title: "Blog",
-    icon: <BookOpen className="w-8 h-8" />,
-    color: "from-purple-400 to-purple-500",
-  },
+  id: 2,
+  title: "Win & Earn",
+  icon: <Users className="w-8 h-8" />,
+  color: "from-blue-400 to-blue-500",
+  image: "/images/quiz.jpeg",  
+ },
   {
     id: 3,
     title: "Teachers",
