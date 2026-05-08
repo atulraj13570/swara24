@@ -15,8 +15,7 @@ interface ExploreCard {
   title: string;
   icon: React.ReactNode;
   color: string;
-  image?: string;
-}
+},
 
 const exploreCards: ExploreCard[] = [
   {
@@ -29,8 +28,7 @@ const exploreCards: ExploreCard[] = [
   id: 2,
   title: "Win & Earn",
   icon: <Users className="w-8 h-8" />,
-  color: "from-blue-400 to-blue-500",
-  image: "/images/quiz.jpeg",  
+  color: "from-blue-400 to-blue-500",  
  },
   {
     id: 3,
@@ -55,7 +53,6 @@ const exploreCards: ExploreCard[] = [
     title: "Pricing",
     icon: <DollarSign className="w-8 h-8" />,
     color: "from-red-400 to-red-500",
-    image: "/images/beauty.jpeg",
   },
   {
     id: 7,
@@ -74,7 +71,7 @@ const exploreCards: ExploreCard[] = [
     title: "More",
     icon: <MoreHorizontal className="w-8 h-8" />,
     color: "from-gray-400 to-gray-500",
-     },
+  },
 ];
 
 export default function ExploreSection() {
@@ -94,48 +91,37 @@ export default function ExploreSection() {
         {/* Cards Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 md:gap-8">
           {exploreCards.map((card) => (
-  <div
-    key={card.id}
-    className="card-hover group cursor-pointer"
-  >
-    <div className="h-40 md:h-48 rounded-2xl bg-white shadow-md overflow-hidden flex items-center justify-center relative">
+            <div
+              key={card.id}
+              className="card-hover group cursor-pointer"
+            >
+              <div className="h-40 md:h-48 rounded-2xl bg-white shadow-md overflow-hidden flex items-center justify-center relative">
+                {/* Gradient Background */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+                ></div>
 
-      {card.image && (
-        <img
-          src={card.image}
-          alt={card.title}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      )}
+                {/* Icon Container */}
+                <div className="relative z-10 flex flex-col items-center justify-center gap-3 w-full h-full p-4">
+                  <div
+                    className={`p-4 rounded-xl bg-gradient-to-br ${card.color} text-white shadow-lg group-hover:shadow-xl transition-shadow duration-300`}
+                  >
+                    {card.icon}
+                  </div>
 
-      <div
-        className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-40 group-hover:opacity-60 transition-opacity duration-300`}
-      ></div>
+                  {/* Title below on mobile, inside on hover */}
+                  <p className="text-center text-sm md:text-base font-semibold text-primary text-opacity-0 md:text-opacity-100 group-hover:text-opacity-100 transition-all duration-300 mt-2 md:mt-0">
+                    {card.title}
+                  </p>
+                </div>
+              </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center gap-3 w-full h-full p-4">
-
-        <div
-          className={`p-4 rounded-xl bg-gradient-to-br ${card.color} text-white shadow-lg group-hover:shadow-xl transition-shadow duration-300`}
-        >
-          {card.icon}
-        </div>
-
-        <p className={`text-center text-sm md:text-base font-semibold ${
-              card.image ? "text-white" : "text-primary"
-              }`} >
-          {card.title}
-        </p>
-
-      </div>
-    </div>
-
-    {/* Mobile Title */}
-    <h3 className="mt-3 text-center font-semibold text-primary md:hidden">
-      {card.title}
-    </h3>
-    </div>
-))}
-
+              {/* Mobile Title */}
+              <h3 className="mt-3 text-center font-semibold text-primary md:hidden">
+                {card.title}
+              </h3>
+            </div>
+          ))}
         </div>
       </div>
     </section>
