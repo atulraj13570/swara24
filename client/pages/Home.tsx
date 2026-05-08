@@ -38,6 +38,7 @@ interface Section {
   description: string;
   icon: React.ReactNode;
   color: string;
+  image?: string;
   type: "study" | "quiz" | "video" | "products" | "generic";
 }
 
@@ -222,6 +223,7 @@ const sections: Section[] = [
     icon: <BookOpen className="w-8 h-8" />,
     color: "from-blue-400 to-blue-600",
     type: "study",
+    
   },
   {
     id: "winandear",
@@ -229,6 +231,7 @@ const sections: Section[] = [
     description: "Answer questions and earn gold coins",
     icon: <Trophy className="w-8 h-8" />,
     color: "from-yellow-400 to-yellow-600",
+    image: "/images/quiz.jpeg",
     type: "quiz",
   },
   {
@@ -245,6 +248,7 @@ const sections: Section[] = [
     description: "Videos on various news categories",
     icon: <Newspaper className="w-8 h-8" />,
     color: "from-red-400 to-red-600",
+    image: "/images/news.jpeg",
     type: "video",
   },
   {
@@ -261,6 +265,7 @@ const sections: Section[] = [
     description: "Text and video content on wellness",
     icon: <Heart className="w-8 h-8" />,
     color: "from-pink-400 to-pink-600",
+    image: "/images/beauty.jpeg",
     type: "generic",
   },
   {
@@ -277,6 +282,7 @@ const sections: Section[] = [
     description: "Enroll in premium courses",
     icon: <Play className="w-8 h-8" />,
     color: "from-indigo-400 to-indigo-600",
+    image: "/images/paid-classes.jpeg",
     type: "generic",
   },
 ];
@@ -453,6 +459,13 @@ export default function Home() {
                     style={{ transformStyle: "preserve-3d" }}
                   >
                     <div className={`w-full h-40 bg-gradient-to-br ${section.color} relative overflow-hidden`}>
+                      {section.image && (
+                          <img
+                               src={section.image}
+                               alt={section.title}
+                               className="absolute inset-0 w-full h-full object-cover"
+                                />
+                                )}
                       <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
                       <motion.div 
                         initial={{ scale: 1 }}
