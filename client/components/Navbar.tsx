@@ -59,17 +59,30 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
-          >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-primary" />
-            ) : (
-              <Menu className="w-6 h-6 text-primary" />
-            )}
-          </button>
-        </div>
+          {/* Mobile Right Side */}
+<div className="md:hidden flex items-center gap-2">
+
+  {/* Mobile Login Button */}
+  <Link
+    to="/login"
+    className="px-4 py-2 text-sm font-medium border border-primary text-primary rounded-lg"
+  >
+    Login
+  </Link>
+
+  {/* Hamburger Menu Button */}
+  <button
+    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+  >
+    {mobileMenuOpen ? (
+      <X className="w-6 h-6 text-primary" />
+    ) : (
+      <Menu className="w-6 h-6 text-primary" />
+    )}
+  </button>
+
+</div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
