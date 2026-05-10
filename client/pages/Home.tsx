@@ -333,6 +333,12 @@ export default function Home() {
   setQuizIndex(0);
   setWrongAnswers(0);
   setQuizStarted(false);
+  setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, 100);
 };
 
   const handleQuizAnswer = (selectedOption: number) => {
