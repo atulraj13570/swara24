@@ -329,6 +329,7 @@ export default function Home() {
   setSelectedSection(null);
   setSelectedFormat(null);
   setSelectedClass(null);
+  setSelectedCategory(null);
   setQuizIndex(0);
   setWrongAnswers(0);
   setQuizStarted(false);
