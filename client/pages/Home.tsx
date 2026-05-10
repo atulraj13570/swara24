@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { BookOpen, Trophy, Film, Newspaper, Lightbulb, Heart, ShoppingBag, Play, ArrowLeft, FileText, Video, Volume2, Coins, ShoppingCart, Sparkles } from "lucide-react";
@@ -333,13 +333,15 @@ export default function Home() {
   setQuizIndex(0);
   setWrongAnswers(0);
   setQuizStarted(false);
-  setTimeout(() => {
+};
+useEffect(() => {
+  if (currentView === "grid") {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-  }, 100);
-};
+  }
+}, [currentView]);
 
   const handleQuizAnswer = (selectedOption: number) => {
     const isCorrect = selectedOption === quizQuestions[quizIndex].correctAnswer;
