@@ -83,6 +83,10 @@ const studyClasses: Class[] = [
       { id: 3, name: "Chemistry" },
       { id: 4, name: "Biology" },
       { id: 5, name: "English" },
+      { id: 6, name: "Geography" },
+      { id: 7, name: "History" },
+      { id: 8, name: "Economics" },
+      { id: 9, name: "Civics" },
     ],
   },
   {
@@ -94,6 +98,10 @@ const studyClasses: Class[] = [
       { id: 3, name: "Chemistry" },
       { id: 4, name: "Biology" },
       { id: 5, name: "English" },
+      { id: 6, name: "Geography" },
+      { id: 7, name: "History" },
+      { id: 8, name: "Economics" },
+      { id: 9, name: "Civics" },
     ],
   },
   {
@@ -226,7 +234,7 @@ const sections: Section[] = [
     
   },
   {
-    id: "winandear",
+    id: "winandearn",
     title: "Win & Earn",
     description: "Answer questions and earn gold coins",
     icon: <Trophy className="w-8 h-8" />,
