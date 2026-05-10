@@ -81,7 +81,7 @@ export default function Navbar() {
       <Menu className="w-6 h-6 text-primary" />
     )}
   </button>
-
+</div>
 </div>
 
         {/* Mobile Menu */}

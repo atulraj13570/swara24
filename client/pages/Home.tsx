@@ -323,14 +323,16 @@ export default function Home() {
   };
 
   const handleBackToGrid = () => {
-    setCurrentView("grid");
-    setSelectedSection(null);
-    setSelectedFormat(null);
-    setSelectedClass(null);
-    setQuizIndex(0);
-    setWrongAnswers(0);
-    setQuizStarted(false);
-  };
+  console.log("BACK CLICKED");
+
+  setCurrentView("grid");
+  setSelectedSection(null);
+  setSelectedFormat(null);
+  setSelectedClass(null);
+  setQuizIndex(0);
+  setWrongAnswers(0);
+  setQuizStarted(false);
+};
 
   const handleQuizAnswer = (selectedOption: number) => {
     const isCorrect = selectedOption === quizQuestions[quizIndex].correctAnswer;
