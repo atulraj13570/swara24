@@ -16,15 +16,6 @@ export default function Navbar() {
   return () => window.removeEventListener("scroll", handleScroll);
 }, []);
 
-useEffect(() => {
-  if (currentView === "grid") {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
-}, [currentView]);
-
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Courses", href: "#courses" },
