@@ -31,7 +31,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
   <img
-    src="/images/logo.jpeg"
+    src="/images/logo-icon.png"
     alt="Swara24 Logo"
     className="w-14 h-14 object-contain drop-shadow-lg"
   />
