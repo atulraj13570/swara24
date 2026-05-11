@@ -15,7 +15,6 @@ export default function Navbar() {
 
   return () => window.removeEventListener("scroll", handleScroll);
 }, []);
-
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Courses", href: "#courses" },
@@ -30,14 +29,13 @@ export default function Navbar() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'glass py-3' : 'bg-transparent py-5'}`}>
         <div className="section-container py-4 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-              <span className="text-white font-bold text-lg">S</span>
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Swara24
-            </span>
-          </Link>
+          <Link to="/" className="flex items-center">
+  <img
+    src="/images/logo.jpeg"
+    alt="Swara24 Logo"
+    className="w-14 h-14 object-contain drop-shadow-lg"
+  />
+</Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
