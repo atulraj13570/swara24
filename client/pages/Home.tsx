@@ -389,9 +389,9 @@ useEffect(() => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="space-y-8"
+                className="space-y-6"
               >
-                <div className="space-y-4">
+                 <div className="space-y-4 max-w-2xl">
                   <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight text-foreground">
                     Master Your Future with <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">Swara24</span>
                   </h1>

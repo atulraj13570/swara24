@@ -33,7 +33,7 @@ export default function Navbar() {
   <img
     src="/images/logo-icon.png"
     alt="Swara24 Logo"
-    className="w-14 h-14 object-contain drop-shadow-lg"
+    className="w-12 h-12 object-contain drop-shadow-lg"
   />
 </Link>
 

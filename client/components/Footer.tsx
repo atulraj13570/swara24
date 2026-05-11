@@ -11,12 +11,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-                <span className="text-primary font-bold text-lg">S</span>
-              </div>
-              <span className="text-2xl font-bold">Swara24</span>
-            </div>
+            <div className="flex items-center">
+  <img
+    src="/images/logo1.jpeg"
+    alt="Swara24 Logo"
+    className="w-48 md:w-30 object-contain drop-shadow-2xl rounded-lg"
+  />
+</div>
             <p className="text-white/70 text-sm leading-relaxed">
               Empowering learners worldwide with premium education and expert instruction.
             </p>
