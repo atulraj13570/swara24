@@ -335,10 +335,12 @@ export default function Home() {
   setQuizStarted(false);
 };
 useEffect(() => {
-  if (currentView === "grid") {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
+  if (currentView === "section") {
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     });
   }
 }, [currentView]);
