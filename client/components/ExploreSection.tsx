@@ -15,7 +15,7 @@ interface ExploreCard {
   title: string;
   icon: React.ReactNode;
   color: string;
-},
+};
 
 const exploreCards: ExploreCard[] = [
   {

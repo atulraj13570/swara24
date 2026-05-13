@@ -29,7 +29,7 @@ interface QuizQuestion {
   question: string;
   options: string[];
   correctAnswer: number;
-  image: string;
+  /*image: string;*/
 }
 
 interface Section {
@@ -135,35 +135,35 @@ const quizQuestions: QuizQuestion[] = [
     question: "What is the capital of France?",
     options: ["London", "Paris", "Berlin", "Madrid"],
     correctAnswer: 1,
-    image: "bg-gradient-to-br from-yellow-400 to-yellow-500",
+    /*image: "bg-gradient-to-br from-yellow-400 to-yellow-500",*/
   },
   {
     id: 2,
     question: "Which planet is known as the Red Planet?",
     options: ["Venus", "Mars", "Jupiter", "Saturn"],
     correctAnswer: 1,
-    image: "bg-gradient-to-br from-yellow-500 to-yellow-600",
+    /*image: "bg-gradient-to-br from-yellow-500 to-yellow-600",*/
   },
   {
     id: 3,
     question: "What is the smallest prime number?",
     options: ["0", "1", "2", "3"],
     correctAnswer: 2,
-    image: "bg-gradient-to-br from-yellow-600 to-yellow-700",
+    /*image: "bg-gradient-to-br from-yellow-600 to-yellow-700",*/
   },
   {
     id: 4,
     question: "Who wrote Romeo and Juliet?",
     options: ["Milton", "Shakespeare", "Marlowe", "Jonson"],
     correctAnswer: 1,
-    image: "bg-gradient-to-br from-yellow-400 to-orange-500",
+    /*image: "bg-gradient-to-br from-yellow-400 to-orange-500",*/
   },
   {
     id: 5,
     question: "What is the largest ocean on Earth?",
     options: ["Atlantic", "Indian", "Pacific", "Arctic"],
     correctAnswer: 2,
-    image: "bg-gradient-to-br from-yellow-500 to-orange-600",
+    /*image: "bg-gradient-to-br from-yellow-500 to-orange-600",*/
   },
 ];
 
@@ -260,9 +260,9 @@ const sections: Section[] = [
     type: "video",
   },
   {
-    id: "business",
+    id: "businessideas",
     title: "Business Ideas",
-    description: "Text and video content on business",
+    description: "Video content on business",
     icon: <Lightbulb className="w-8 h-8" />,
     color: "from-green-400 to-green-600",
     type: "generic",
@@ -300,7 +300,7 @@ type ViewState = "grid" | "section";
 export default function Home() {
   const [currentView, setCurrentView] = useState<ViewState>("grid");
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
-  const [selectedFormat, setSelectedFormat] = useState<"text" | "video" | null>(null);
+  const [selectedFormat, setSelectedFormat] = useState<"text" | "video" | "quiz" | null>(null);
   const [selectedClass, setSelectedClass] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
@@ -315,35 +315,49 @@ export default function Home() {
   const handleSelectSection = (sectionId: string) => {
     setSelectedSection(sectionId);
     setCurrentView("section");
-    setSelectedFormat(null);
+    /*setSelectedFormat(null);*/
     setSelectedClass(null);
     setQuizIndex(0);
     setWrongAnswers(0);
+    // Directly start quiz for Win & Earn
+  if (sectionId === "winandearn") {
+    setSelectedFormat("quiz");
+    setQuizStarted(true);
+  }
+  // Business Ideas
+  else if (sectionId === "businessideas") {
+    setSelectedFormat("video");
     setQuizStarted(false);
+  }
+  else {
+    setSelectedFormat(null);
+    setQuizStarted(false);
+  }
   };
 
-  const handleBackToGrid = () => {
-  console.log("BACK CLICKED");
+ const handleBack = () => {
+  // From class content -> back to class selection
+  if (selectedClass) {
+    setSelectedClass(null);
+    return;
+  }
 
-  setCurrentView("grid");
-  setSelectedSection(null);
-  setSelectedFormat(null);
-  setSelectedClass(null);
-  setSelectedCategory(null);
-  setQuizIndex(0);
-  setWrongAnswers(0);
-  setQuizStarted(false);
+  // From format selection -> back to section
+  if (selectedFormat) {
+    setSelectedFormat(null);
+    return;
+  }
+
+  // From section -> back to grid
+  if (selectedSection) {
+    setSelectedSection(null);
+    setCurrentView("grid");
+    return;
+  }
 };
 useEffect(() => {
-  if (currentView === "section") {
-    requestAnimationFrame(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    });
-  }
-}, [currentView]);
+  window.scrollTo(0, 0);
+}, [selectedSection, selectedFormat, selectedClass]);
 
   const handleQuizAnswer = (selectedOption: number) => {
     const isCorrect = selectedOption === quizQuestions[quizIndex].correctAnswer;
@@ -373,7 +387,7 @@ useEffect(() => {
       {currentView === "grid" ? (
         // Grid View
         <>
-          <section className="relative min-h-[90vh] flex items-center bg-background overflow-hidden pt-24">
+          <section className="relative min-h-[90vh] flex items-center bg-background overflow-hidden pt-32">
             {/* 3D and Glass Background Effect */}
             <div className="absolute inset-0 z-0 overflow-hidden">
               <div className="absolute inset-0 opacity-40">
@@ -540,21 +554,39 @@ useEffect(() => {
       ) : currentSection?.id === "study" ? (
         // Study Material Section
         <>
-          <section className={`bg-gradient-to-br ${currentSection.color} text-white py-12 pt-24 relative overflow-hidden`}>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-48"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -ml-48"></div>
+          <section className={`bg-gradient-to-br ${currentSection.color} text-white py-12 pt-32 relative overflow-hidden`}>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-48 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -ml-48 pointer-events-none"></div>
 
-            <div className="section-container relative z-10">
-              <button
-                onClick={handleBackToGrid}
-                className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold"
-              >
-                <ArrowLeft className="w-5 h-5" />
-                Back to All Categories
-              </button>
-              <h1 className="text-4xl md:text-5xl font-bold">{currentSection.title}</h1>
-            </div>
-          </section>
+            <div className="section-container relative z-[60]">
+
+  <button
+  style={{ position: "relative", zIndex: 70 }}
+    onClick={() => {
+      
+      setSelectedSection(null);
+      setCurrentView("grid");
+
+      setQuizStarted(false);
+      setQuizIndex(0);
+      setWrongAnswers(0);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }}
+    className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold cursor-pointer"
+  >
+    <ArrowLeft className="w-5 h-5" />
+    Back to All Categories
+  </button>
+
+  <h1 className="text-4xl md:text-5xl font-bold">
+    {currentSection.title}
+  </h1>
+
+</div>
+</section>
 
           {!selectedFormat && !selectedClass ? (
             // Class Selection
@@ -659,17 +691,18 @@ useEffect(() => {
 
           <Footer />
         </>
-      ) : currentSection?.id === "winandear" ? (
+      ) : currentSection?.id === "winandearn" ? (
         // Win & Earn Quiz Section
         <>
-          <section className={`bg-gradient-to-br ${currentSection.color} text-white py-12 pt-24 relative overflow-hidden`}>
+          <section className={`bg-gradient-to-br ${currentSection.color} text-white py-12 pt-32 relative overflow-hidden`}>
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-48"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -ml-48"></div>
 
             <div className="section-container relative z-10">
               <button
-                onClick={handleBackToGrid}
-                className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold"
+                onClick={handleBack}
+                className="flex items-center gap-2 mb-6 text-white hover:text-white/80
+                 transition-colors font-semibold cursor-pointer"
               >
                 <ArrowLeft className="w-5 h-5" />
                 Back
@@ -756,14 +789,14 @@ useEffect(() => {
       ) : currentSection?.id === "movies" ? (
         // Movie Summary Section
         <>
-          <section className={`bg-gradient-to-br ${currentSection.color} text-white py-12 pt-24 relative overflow-hidden`}>
+          <section className={`bg-gradient-to-br ${currentSection.color} text-white py-12 pt-32 relative overflow-hidden`}>
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-48"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -ml-48"></div>
 
             <div className="section-container relative z-10">
               <button
-                onClick={handleBackToGrid}
-                className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold"
+                onClick={handleBack}
+                className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold cursor-pointer"
               >
                 <ArrowLeft className="w-5 h-5" />
                 Back
@@ -807,14 +840,14 @@ useEffect(() => {
       ) : currentSection?.id === "news" ? (
         // News Section
         <>
-          <section className={`bg-gradient-to-br ${currentSection.color} text-white py-12 pt-24 relative overflow-hidden`}>
+          <section className={`bg-gradient-to-br ${currentSection.color} text-white py-12 pt-32 relative overflow-hidden`}>
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-48"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -ml-48"></div>
 
             <div className="section-container relative z-10">
               <button
-                onClick={handleBackToGrid}
-                className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold"
+                onClick={handleBack}
+                className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold cursor-pointer"
               >
                 <ArrowLeft className="w-5 h-5" />
                 Back
@@ -852,14 +885,14 @@ useEffect(() => {
       ) : currentSection?.id === "products" ? (
         // Buy Products Section
         <>
-          <section className={`bg-gradient-to-br ${currentSection.color} text-white py-12 pt-24 relative overflow-hidden`}>
+          <section className={`bg-gradient-to-br ${currentSection.color} text-white py-12 pt-32 relative overflow-hidden`}>
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-48"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -ml-48"></div>
 
             <div className="section-container relative z-10">
               <button
-                onClick={handleBackToGrid}
-                className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold"
+                onClick={handleBack}
+                className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold cursor-pointer"
               >
                 <ArrowLeft className="w-5 h-5" />
                 Back
@@ -899,14 +932,14 @@ useEffect(() => {
       ) : (
         // Generic Section (Business Ideas, Beauty & Fitness, Paid Classes)
         <>
-          <section className={`bg-gradient-to-br ${currentSection?.color} text-white py-12 pt-24 relative overflow-hidden`}>
+          <section className={`bg-gradient-to-br ${currentSection?.color} text-white py-12 pt-32 relative overflow-hidden`}>
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-48"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -ml-48"></div>
 
             <div className="section-container relative z-10">
               <button
-                onClick={handleBackToGrid}
-                className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold"
+                onClick={handleBack}
+               className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold cursor-pointer"
               >
                 <ArrowLeft className="w-5 h-5" />
                 Back
@@ -915,29 +948,41 @@ useEffect(() => {
             </div>
           </section>
 
-          {currentSection?.id !== "classes" && (
-            <section className="py-16 md:py-24 bg-white">
-              <div className="section-container">
-                <div className="max-w-4xl mx-auto space-y-8 mb-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-center text-primary">
-                    Choose Your Format
-                  </h2>
+  <section className="py-16 md:py-24 bg-white">
 
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <button
-                      onClick={() => setSelectedFormat("text")}
-                      className="group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white border-2 border-gray-200 hover:border-primary"
-                    >
-                      <div className="bg-gradient-to-br from-blue-500 to-blue-600 h-48 flex items-center justify-center">
-                        <FileText className="w-20 h-20 text-white" />
-                      </div>
-                      <div className="p-8 space-y-4">
-                        <h3 className="text-2xl font-bold text-primary">Text Content</h3>
-                        <p className="text-gray-600">Read articles and guides</p>
-                      </div>
-                    </button>
+    <div className="section-container">
+       {/* FORMAT SELECTION */}
+    {currentSection?.id !== "winandearn" &&
+     currentSection?.id !== "businessideas" &&
+     currentSection?.id !== "classes" && (
 
-                    <button
+      <div className="max-w-4xl mx-auto space-y-8 mb-12">
+
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-primary">
+          Choose Your Format
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-8">
+
+          <button
+    onClick={() => setSelectedFormat("text")}
+    className="group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white border-2 border-gray-200 hover:border-primary"
+  >
+    <div className="bg-gradient-to-br from-blue-500 to-blue-600 h-48 flex items-center justify-center">
+      <FileText className="w-20 h-20 text-white" />
+    </div>
+
+    <div className="p-8 space-y-4">
+      <h3 className="text-2xl font-bold text-primary">
+        Text Content
+      </h3>
+
+      <p className="text-gray-600">
+        Read articles and guides
+      </p>
+    </div>
+  </button>
+                   <button
                       onClick={() => setSelectedFormat("video")}
                       className="group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 bg-white border-2 border-gray-200 hover:border-primary"
                     >
@@ -951,7 +996,7 @@ useEffect(() => {
                     </button>
                   </div>
                 </div>
-
+     )}
                 {selectedFormat && (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {[1, 2, 3, 4, 5, 6].map((item) => (
@@ -972,7 +1017,6 @@ useEffect(() => {
                 )}
               </div>
             </section>
-          )}
 
           <Footer />
         </>
