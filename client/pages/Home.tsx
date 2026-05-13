@@ -929,7 +929,156 @@ useEffect(() => {
 
           <Footer />
         </>
+     ) : currentSection?.id === "classes" ? (
+
+<>
+  {/* HEADER */}
+  <section
+    className={`bg-gradient-to-br ${currentSection?.color} text-white py-12 pt-32 relative overflow-hidden`}
+  >
+    <div className="section-container relative z-10">
+
+      <button
+        onClick={handleBack}
+        className="flex items-center gap-2 mb-6 text-white hover:text-white/80 transition-colors font-semibold cursor-pointer"
+      >
+        <ArrowLeft className="w-5 h-5" />
+        Back
+      </button>
+
+      <h1 className="text-4xl md:text-5xl font-bold">
+        Paid Classes
+      </h1>
+
+    </div>
+  </section>
+
+  {/* CONTENT */}
+  <section className="py-16 md:py-24 bg-white">
+
+    <div className="section-container">
+
+      {/* CLASS LIST */}
+      {!selectedClass ? (
+
+        <div className="space-y-8">
+
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-primary">
+            Select Your Class
+          </h2>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+            {studyClasses.map((cls) => (
+
+              <button
+                key={cls.id}
+                onClick={() => {
+                  setSelectedClass(cls.classNum);
+                  setSelectedFormat("video");
+                }}
+                className="
+                  p-6
+                  rounded-2xl
+                  border-2
+                  border-gray-200
+                  hover:border-primary
+                  hover:bg-blue-50
+                  transition-all
+                  font-bold
+                  text-xl
+                  text-primary
+                  shadow-md
+                  hover:shadow-xl
+                "
+              >
+                Class {cls.classNum}
+              </button>
+
+            ))}
+
+          </div>
+
+        </div>
+
       ) : (
+
+        <div className="space-y-8">
+
+          {/* BACK BUTTON */}
+          <button
+            onClick={() => {
+              setSelectedClass(null);
+              setSelectedFormat(null);
+            }}
+            className="flex items-center gap-2 text-primary hover:text-secondary transition-colors font-semibold"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back to Classes
+          </button>
+
+          {/* SUBJECT TITLE */}
+          <h2 className="text-3xl md:text-4xl font-bold text-primary">
+            Class {selectedClass} Subjects
+          </h2>
+
+          {/* SUBJECT CARDS */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            {studyClasses
+              .find((c) => c.classNum === selectedClass)
+              ?.subjects.map((subject) => (
+
+                <div
+                  key={subject.id}
+                  className="
+                    group
+                    cursor-pointer
+                    rounded-2xl
+                    overflow-hidden
+                    shadow-md
+                    hover:shadow-xl
+                    transition-all
+                    duration-300
+                    transform
+                    hover:scale-105
+                    bg-white
+                    border
+                    border-gray-100
+                  "
+                >
+                  <div className="bg-gradient-to-br from-blue-400 to-blue-600 h-48"></div>
+
+                  <div className="p-6">
+
+                    <h3 className="text-xl font-bold text-primary">
+                      {subject.name}
+                    </h3>
+
+                    <button className="mt-4 inline-flex items-center gap-2 text-accent font-semibold">
+                      Watch Now <span>→</span>
+                    </button>
+
+                  </div>
+                </div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      )}
+
+    </div>
+
+  </section>
+
+  <Footer />
+</>
+
+) : (
+  // Generic Section
         // Generic Section (Business Ideas, Beauty & Fitness, Paid Classes)
         <>
           <section className={`bg-gradient-to-br ${currentSection?.color} text-white py-12 pt-32 relative overflow-hidden`}>
@@ -952,9 +1101,8 @@ useEffect(() => {
 
     <div className="section-container">
        {/* FORMAT SELECTION */}
-    {currentSection?.id !== "winandearn" &&
-     currentSection?.id !== "businessideas" &&
-     currentSection?.id !== "classes" && (
+    {currentSection?.id !== "classes" &&
+     currentSection?.id !== "businessideas" && (
 
       <div className="max-w-4xl mx-auto space-y-8 mb-12">
 
