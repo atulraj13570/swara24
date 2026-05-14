@@ -112,10 +112,10 @@ export default function Footer() {
                 <div>
                   <p className="text-sm text-white/70">Email</p>
                   <a
-                    href="mailto:hello@swara24.com"
+                    href="ceo.swara24@gmail.com"
                     className="text-gray-400 hover:text-primary transition-colors"
                   >
-                    hello@swara24.com
+                    ceo.swara24@gmail.com
                   </a>
                 </div>
               </div>
@@ -134,8 +134,8 @@ export default function Footer() {
               <div className="flex gap-3">
                 <MapPin className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white/70">Location</p>
-                  <p className="text-white">San Francisco, CA</p>
+                  <p className="text-sm text-white/70">Address</p>
+                  <p className="text-white">Khadi Bhandar,in front of new Mithanpura Police Station, Muzaffarpur,pin code - 842002</p>
                 </div>
               </div>
             </div>

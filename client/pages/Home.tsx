@@ -230,6 +230,7 @@ const sections: Section[] = [
     description: "Classes 6-12 with subjects and text/video options",
     icon: <BookOpen className="w-8 h-8" />,
     color: "from-blue-400 to-blue-600",
+    image: "/images/studymaterials.jpeg",
     type: "study",
     
   },
@@ -248,6 +249,7 @@ const sections: Section[] = [
     description: "Video clips with voice over facility",
     icon: <Film className="w-8 h-8" />,
     color: "from-purple-400 to-purple-600",
+    image: "/images/movie.jpeg",
     type: "video",
   },
   {
@@ -265,6 +267,7 @@ const sections: Section[] = [
     description: "Video content on business",
     icon: <Lightbulb className="w-8 h-8" />,
     color: "from-green-400 to-green-600",
+    image: "/images/business.jpeg",
     type: "generic",
   },
   {
@@ -282,6 +285,7 @@ const sections: Section[] = [
     description: "Educational books and materials",
     icon: <ShoppingBag className="w-8 h-8" />,
     color: "from-cyan-400 to-cyan-600",
+    image: "/images/products.jpeg",
     type: "products",
   },
   {
@@ -762,7 +766,7 @@ useEffect(() => {
                     <span className="text-sm font-semibold text-red-600">Wrong: {wrongAnswers}/10</span>
                   </div>
 
-                  <div className={`rounded-3xl h-32 ${quizQuestions[quizIndex].image}`}></div>
+                  <div className={`rounded-3xl h-32 $quizQuestions[quizIndex]`}></div>
 
                   <h3 className="text-2xl font-bold text-primary text-center">
                     {quizQuestions[quizIndex].question}
