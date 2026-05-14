@@ -112,8 +112,8 @@ export default function Footer() {
                 <div>
                   <p className="text-sm text-white/70">Email</p>
                   <a
-                    href="ceo.swara24@gmail.com"
-                    className="text-gray-400 hover:text-primary transition-colors"
+                    href="mailto:ceo.swara24@gmail.com"
+                    className="text-gray-400 hover:text-white transition-colors"
                   >
                     ceo.swara24@gmail.com
                   </a>
