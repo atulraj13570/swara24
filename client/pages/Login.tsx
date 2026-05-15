@@ -21,18 +21,26 @@ export default function Login() {
       <div className="w-full max-w-md relative z-10">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center">
-              <span className="text-primary font-bold text-xl">S</span>
-            </div>
-            <span className="text-2xl font-bold text-white">Swara24</span>
-          </Link>
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-            Welcome Back
-          </h1>
-          <p className="text-white/70">Sign in to your account to continue learning</p>
-        </div>
+  <Link to="/" className="inline-flex items-center gap-3 mb-6">
+    <img
+      src="/images/logo-icon.png"
+      alt="Swara24 Logo"
+      className="w-12 h-10 rounded-xl object-contain bg-white p-1 shadow-md"
+    />
 
+    <span className="text-2xl font-bold text-white">
+      Swara24
+    </span>
+  </Link>
+
+  <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+    Welcome Back
+  </h1>
+
+  <p className="text-white/70">
+    Sign in to your account to continue learning
+  </p>
+</div>
         {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-6 bg-white rounded-2xl p-8 shadow-2xl">
           {/* Phone Number Field */}
